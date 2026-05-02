@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body onload="loadComplaints()">
+
+<h2>Dashboard</h2>
+
+<button onclick="logout()">Logout</button>
+
+<h3>Submit Complaint</h3>
+
+<input type="text" id="title" placeholder="Title">
+<textarea id="description" placeholder="Description"></textarea>
+
+<button onclick="submitComplaint()">Submit</button>
+
+<h3>Your Complaints</h3>
+<div id="complaintsList"></div>
+
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/complaint.js"></script>
+
+</body>
+</html>
