@@ -1,17 +1,62 @@
 body {
+  margin: 0;
   font-family: Arial;
-  text-align: center;
+  background: #f5f7fb;
 }
 
-input, textarea {
-  display: block;
-  margin: 10px auto;
-  padding: 8px;
+.layout {
+  display: flex;
+}
+
+.sidebar {
   width: 200px;
+  background: #1e2a38;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 button {
+  background: #2d7df6;
+  color: white;
+  border: none;
   padding: 10px;
-  margin: 5px;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.cards {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }

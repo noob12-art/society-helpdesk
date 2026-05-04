@@ -1,38 +1,42 @@
-import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 import { app } from "../firebase/firebase-config.js";
+import { getDatabase, ref, push, onValue } 
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
 const db = getDatabase(app);
 
-// SUBMIT COMPLAINT
-window.submitComplaint = function () {
-  const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
+window.submitComplaint = function(){
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("desc").value;
 
-  const newRef = push(ref(db, "complaints"));
-
-  set(newRef, {
-    title: title,
-    description: description,
-    status: "Pending"
+  push(ref(db,"complaints"),{
+    title, desc, status:"Pending"
   });
 
-  alert("Complaint submitted");
-};
+  alert("Submitted");
+}
 
-// LOAD COMPLAINTS
-window.loadComplaints = function () {
-  const list = document.getElementById("complaintsList");
+const list = document.getElementById("list");
 
-  const dbRef = ref(db, "complaints");
+if(list){
+  onValue(ref(db,"complaints"), snapshot=>{
+    list.innerHTML="";
+    let p=0,pr=0,r=0;
 
-  onValue(dbRef, (snapshot) => {
-    let html = "";
+    snapshot.forEach(data=>{
+      let c = data.val();
 
-    snapshot.forEach((child) => {
-      const data = child.val();
-      html += `<p>${data.title} - ${data.status}</p>`;
+      let li=document.createElement("li");
+      li.className="list-group-item";
+      li.innerHTML = c.title + " - " + c.status;
+      list.appendChild(li);
+
+      if(c.status=="Pending") p++;
+      else if(c.status=="In Progress") pr++;
+      else r++;
     });
 
-    list.innerHTML = html;
+    document.getElementById("p").innerText=p;
+    document.getElementById("pr").innerText=pr;
+    document.getElementById("r").innerText=r;
   });
-};
+}

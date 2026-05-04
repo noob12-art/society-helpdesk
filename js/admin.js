@@ -1,44 +1,32 @@
 // js/admin.js
 
 import { app } from "../firebase/firebase-config.js";
+import { getDatabase, ref, onValue, update } 
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  updateDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+const db = getDatabase(app);
+const list = document.getElementById("adminList");
 
-const db = getFirestore(app);
+onValue(ref(db,"complaints"), snapshot=>{
+  list.innerHTML="";
 
-window.loadAllComplaints = async function () {
-  const list = document.getElementById("adminList");
+  snapshot.forEach(data=>{
+    let c = data.val();
+    let key = data.key;
 
-  const snapshot = await getDocs(collection(db, "complaints"));
+    let li=document.createElement("li");
+    li.className="list-group-item";
 
-  let html = "";
-
-  snapshot.forEach((item) => {
-    const data = item.data();
-
-    html += `
-      <p>
-        ${data.title} - ${data.status}
-        <button onclick="resolve('${item.id}')">Resolve</button>
-      </p>
+    li.innerHTML = `
+      ${c.title} - ${c.status}
+      <button onclick="change('${key}','In Progress')" class="btn btn-warning btn-sm">Progress</button>
+      <button onclick="change('${key}','Resolved')" class="btn btn-success btn-sm">Resolve</button>
     `;
+
+    list.appendChild(li);
   });
+});
 
-  list.innerHTML = html;
-};
-
-window.resolve = async function (id) {
-  const ref = doc(db, "complaints", id);
-
-  await updateDoc(ref, {
-    status: "Resolved"
-  });
-
-  loadAllComplaints();
-};
+window.change = function(id,status){
+  update(ref(db,"complaints/"+id),{status});
+}
