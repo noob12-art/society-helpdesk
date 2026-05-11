@@ -1,10 +1,11 @@
 const firebaseConfig = {
   apiKey: "AIzaSyD-7BcS-OWkKKtlffxFbxLz9mKwqOzcgOg",
   authDomain: "society-helpdesk-9b874.firebaseapp.com",
+  databaseURL: "https://society-helpdesk-9b874-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "society-helpdesk-9b874",
   storageBucket: "society-helpdesk-9b874.firebasestorage.app",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "1:210358422355:web:a452b84974ff9ba341efa6",
+  messagingSenderId: "210358422355",
+  appId: "1:210358422355:web:a452b84974ff9ba341efa6"
 };
 
 const STORAGE_KEYS = {
@@ -12,6 +13,12 @@ const STORAGE_KEYS = {
   complaints: "society-helpdesk-complaints",
   currentUser: "society-helpdesk-current-user",
 };
+
+// ✅ IMPORTANT (Firebase Admin Login)
+// Put your real admin email(s) here. This makes admin login work even if you forgot to
+// manually set `role: "admin"` in Firestore during development.
+// Later, you can remove this and rely only on Firestore roles / custom claims.
+const ADMIN_EMAIL_ALLOWLIST = ["admin@societyhelpdesk.com"];
 
 export const hasFirebaseConfig = Object.values(firebaseConfig).every(
   (value) => value && !String(value).startsWith("YOUR_")
@@ -156,21 +163,44 @@ export async function loginUser({ email, password, role }) {
 
   if (services) {
     const { auth, db, authSdk, firestoreSdk } = services;
+    const emailLower = String(email || "").toLowerCase();
     const credential = await authSdk.signInWithEmailAndPassword(auth, email, password);
+
     const docRef = firestoreSdk.doc(db, "users", credential.user.uid);
-    const userDoc = await firestoreSdk.getDoc(docRef);
-    const profile = userDoc.exists()
-      ? userDoc.data()
-      : {
-          uid: credential.user.uid,
-          id: credential.user.uid,
-          fullName: credential.user.displayName || "User",
-          email: credential.user.email,
-          role: email.toLowerCase().includes("admin") ? "admin" : "resident",
-        };
+    let userDoc;
+    try {
+      userDoc = await firestoreSdk.getDoc(docRef);
+    } catch (err) {
+      // Usually happens when Firestore rules block reads.
+      throw new Error(
+        "Firestore permission denied. Update Firestore rules to allow authenticated reads/writes while testing."
+      );
+    }
+
+    const allowlistedAdmin = ADMIN_EMAIL_ALLOWLIST.map((e) => e.toLowerCase()).includes(emailLower);
+    const fallbackRole = allowlistedAdmin ? "admin" : "resident";
+
+    const baseProfile = {
+      uid: credential.user.uid,
+      id: credential.user.uid,
+      fullName: credential.user.displayName || "User",
+      email: credential.user.email,
+      role: fallbackRole,
+      createdAt: new Date().toISOString(),
+    };
+
+    const profile = userDoc?.exists() ? { ...baseProfile, ...userDoc.data() } : baseProfile;
+
+    // If user doc doesn't exist, create it automatically (so Firestore doesn't stay empty).
+    // This also helps when you created the user in Auth but forgot to create their Firestore profile.
+    if (!userDoc?.exists()) {
+      await firestoreSdk.setDoc(docRef, profile);
+    }
 
     if (role === "admin" && profile.role !== "admin") {
-      throw new Error("This account does not have admin access.");
+      throw new Error(
+        "This account is not marked as admin. Add your email to ADMIN_EMAIL_ALLOWLIST or set role='admin' in Firestore users/{UID}."
+      );
     }
 
     setCurrentUser(profile);
