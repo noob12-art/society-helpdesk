@@ -78,5 +78,110 @@
 
     <script type="module" src="firebase/firebase-config.js"></script>
     <script type="module" src="js/auth.js"></script>
+    <script>
+  const signupForm = document.getElementById("signupForm");
+  const signupMessage = document.getElementById("signupMessage");
+
+  signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Get field values
+    const fullName = document.getElementById("fullName").value.trim();
+    const flatNumber = document.getElementById("flatNumber").value.trim();
+    const phoneNumber = document.getElementById("phoneNumber").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    // Validation patterns
+    const namePattern = /^[A-Za-z\s]{3,}$/;
+    const flatPattern = /^[A-Za-z0-9\-\/]{1,10}$/;
+    const phonePattern = /^[6-9]\d{9}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Clear previous message
+    signupMessage.innerHTML = "";
+
+    // Full Name Validation
+    if (!namePattern.test(fullName)) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Enter a valid full name (minimum 3 letters).
+        </div>`;
+      return;
+    }
+
+    // Flat Number Validation
+    if (!flatPattern.test(flatNumber)) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Enter a valid flat number.
+        </div>`;
+      return;
+    }
+
+    // Phone Number Validation
+    if (!phonePattern.test(phoneNumber)) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Enter a valid 10-digit Indian mobile number.
+        </div>`;
+      return;
+    }
+
+    // Email Validation
+    if (!emailPattern.test(email)) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Enter a valid email address.
+        </div>`;
+      return;
+    }
+
+    // Password Length Validation
+    if (password.length < 6) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Password must be at least 6 characters long.
+        </div>`;
+      return;
+    }
+
+    // Password Strength Validation
+    const upperCase = /[A-Z]/;
+    const lowerCase = /[a-z]/;
+    const number = /[0-9]/;
+
+    if (
+      !upperCase.test(password) ||
+      !lowerCase.test(password) ||
+      !number.test(password)
+    ) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Password must contain uppercase, lowercase, and a number.
+        </div>`;
+      return;
+    }
+
+    // Confirm Password Validation
+    if (password !== confirmPassword) {
+      signupMessage.innerHTML =
+        `<div class="alert alert-danger">
+          Passwords do not match.
+        </div>`;
+      return;
+    }
+
+    // Success Message
+    signupMessage.innerHTML =
+      `<div class="alert alert-success">
+        Validation successful! Ready for Firebase signup.
+      </div>`;
+
+    // Firebase signup code goes here
+    console.log("All validations passed");
+  });
+</script>
   </body>
   </html>
