@@ -82,7 +82,75 @@ function bindLogoutButton() {
     window.location.href = "login.html";
   });
 }
+const loginForm = document.getElementById("loginForm");
 
+if (loginForm) {
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const role = document.getElementById("loginRole").value;
+    const loginMessage = document.getElementById("loginMessage");
+
+    // Email validation pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Clear previous messages
+    loginMessage.innerHTML = "";
+
+    // Email validation
+    if (!emailPattern.test(email)) {
+      loginMessage.innerHTML = `
+        <div class="alert alert-danger">
+          Please enter a valid email address.
+        </div>
+      `;
+      return;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      loginMessage.innerHTML = `
+        <div class="alert alert-danger">
+          Password must be at least 6 characters long.
+        </div>
+      `;
+      return;
+    }
+
+    // Role validation
+    if (role !== "resident" && role !== "admin") {
+      loginMessage.innerHTML = `
+        <div class="alert alert-danger">
+          Please select a valid role.
+        </div>
+      `;
+      return;
+    }
+
+    // Demo admin check
+    if (role === "admin" && !email.includes("admin")) {
+      loginMessage.innerHTML = `
+        <div class="alert alert-danger">
+          Admin email must contain the word "admin".
+        </div>
+      `;
+      return;
+    }
+
+    // Success message
+    loginMessage.innerHTML = `
+      <div class="alert alert-success">
+        Login validation successful!
+      </div>
+    `;
+
+    console.log("Login successful");
+
+    // Firebase login code goes here
+  });
+}
 redirectIfNeeded();
 bindSignupForm();
 bindLoginForm();
