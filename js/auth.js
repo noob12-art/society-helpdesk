@@ -97,7 +97,7 @@ function bindSignupForm() {
       );
 
       setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = "raise.html";
       }, 1000);
 
     } catch (error) {
