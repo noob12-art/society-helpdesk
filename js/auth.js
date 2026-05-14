@@ -143,7 +143,7 @@ function bindLoginForm() {
 
     setTimeout(() => {
 
-      // Admin login
+      // ADMIN LOGIN
       if (email === "admin@gmail.com") {
 
         localStorage.setItem(
@@ -156,9 +156,11 @@ function bindLoginForm() {
 
         window.location.href = "admin.html";
 
-      } else {
+      }
 
-        // Resident login
+      // RESIDENT LOGIN
+      else {
+
         localStorage.setItem(
           "user",
           JSON.stringify({
