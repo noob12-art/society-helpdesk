@@ -170,8 +170,77 @@
   </div>
 
 </footer>
-  <!-- Auth JS -->
-  <script type="module" src="js/auth.js"></script>
+  <script>
+
+  const loginForm =
+    document.getElementById("loginForm");
+
+  const loginMessage =
+    document.getElementById("loginMessage");
+
+  loginForm.addEventListener(
+    "submit",
+    function (e) {
+
+      e.preventDefault();
+
+      const email =
+        document.getElementById("loginEmail")
+        .value.trim();
+
+      const password =
+        document.getElementById("loginPassword")
+        .value.trim();
+
+      // Empty validation
+      if (!email || !password) {
+
+        loginMessage.innerHTML =
+          `<div class="alert alert-danger">
+            Please fill all fields.
+          </div>`;
+
+        return;
+      }
+
+      // Admin login
+      if (email === "admin@gmail.com") {
+
+        loginMessage.innerHTML =
+          `<div class="alert alert-success">
+            Admin login successful!
+          </div>`;
+
+        setTimeout(() => {
+
+          window.location.href =
+            "admin.html";
+
+        }, 1000);
+
+      }
+
+      // Resident login
+      else {
+
+        loginMessage.innerHTML =
+          `<div class="alert alert-success">
+            Resident login successful!
+          </div>`;
+
+        setTimeout(() => {
+
+          window.location.href =
+            "dashboard.html";
+
+        }, 1000);
+
+      }
+
+    }
+  );
+
+</script>
 
 </body>
 
