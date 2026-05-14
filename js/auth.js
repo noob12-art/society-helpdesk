@@ -18,22 +18,25 @@ function showMessage(targetId, type, message) {
 function redirectIfNeeded() {
 
   const currentPage =
-    window.location.pathname.split("/").pop() || "index.html";
-
-  // Local storage user
+    window.location.pathname.split("/").pop();
   const user =
     JSON.parse(localStorage.getItem("user"));
 
-  // Dashboard protection
-  if (currentPage === "dashboard.html" && !user) {
+  // Protect dashboard
+  if (
+    currentPage === "dashboard.html" &&
+    !user
+  ) {
+
     window.location.href = "login.html";
   }
 
-  // Admin protection
+  // Protect admin page
   if (
     currentPage === "admin.html" &&
     (!user || user.role !== "admin")
   ) {
+
     window.location.href = "login.html";
   }
 }
