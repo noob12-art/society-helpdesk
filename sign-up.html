@@ -1,187 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up | Society Helpdesk</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Society Helpdesk</a>
-      </div>
-    </nav>
 
-    <section class="page-header">
-      <div class="container">
-        <h1 class="fw-bold mb-2">Create Resident Account</h1>
-        <p class="mb-0">Register once and use the portal anytime.</p>
-      </div>
-    </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <section class="py-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-7">
-            <div class="form-card">
-              <form id="signupForm">
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="fullName">Full name</label>
-                    <input type="text" class="form-control" id="fullName" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="flatNumber">Flat number</label>
-                    <input type="text" class="form-control" id="flatNumber" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="phoneNumber">Phone number</label>
-                    <input type="tel" class="form-control" id="phoneNumber" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="signupEmail">Email address</label>
-                    <input type="email" class="form-control" id="signupEmail" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="signupPassword">Password</label>
-                    <input type="password" class="form-control" id="signupPassword" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="confirmPassword">Confirm password</label>
-                    <input type="password" class="form-control" id="confirmPassword" required />
-                  </div>
+  <title>Sign Up | Society Helpdesk</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+
+      <a class="navbar-brand" href="index.html">
+        Society Helpdesk
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- Header -->
+  <section class="page-header">
+
+    <div class="container">
+
+      <h1 class="fw-bold mb-2">
+        Create Resident Account
+      </h1>
+
+      <p class="mb-0">
+        Register once and use the portal anytime.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- Signup Form -->
+  <section class="py-5">
+
+    <div class="container">
+
+      <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+          <div class="form-card">
+
+            <form id="signupForm">
+
+              <div class="row g-3">
+
+                <!-- Full Name -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="fullName"
+                  >
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    required
+                  />
+
                 </div>
-                <div id="signupMessage" class="mt-3"></div>
-                <button class="btn btn-success w-100 mt-3" type="submit">Create Account</button>
-              </form>
-              <p class="mt-3 mb-0 text-center">
-                Already registered? <a href="login.html">Login here</a>
-              </p>
-            </div>
+
+                <!-- Flat Number -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="flatNumber"
+                  >
+                    Flat Number
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="flatNumber"
+                    required
+                  />
+
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="phoneNumber"
+                  >
+                    Phone Number
+                  </label>
+
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phoneNumber"
+                    required
+                  />
+
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="signupEmail"
+                  >
+                    Email Address
+                  </label>
+
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="signupEmail"
+                    required
+                  />
+
+                </div>
+
+                <!-- Password -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="signupPassword"
+                  >
+                    Password
+                  </label>
+
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signupPassword"
+                    required
+                  />
+
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="col-md-6">
+
+                  <label
+                    class="form-label"
+                    for="confirmPassword"
+                  >
+                    Confirm Password
+                  </label>
+
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmPassword"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+              <!-- Message -->
+              <div id="signupMessage" class="mt-3"></div>
+
+              <!-- Button -->
+              <button
+                class="btn btn-success w-100 mt-3"
+                type="submit"
+              >
+                Create Account
+              </button>
+
+            </form>
+
+            <!-- Login Link -->
+            <p class="mt-3 mb-0 text-center">
+
+              Already registered?
+
+              <a href="login.html">
+                Login here
+              </a>
+
+            </p>
+
           </div>
+
         </div>
+
       </div>
-    </section>
 
-    <footer class="footer">
-      <div class="container text-center">Society Helpdesk</div>
-    </footer>
+    </div>
 
-    <script type="module" src="firebase/firebase-config.js"></script>
-    <script type="module" src="js/auth.js"></script>
-    <script>
-  const signupForm = document.getElementById("signupForm");
-  const signupMessage = document.getElementById("signupMessage");
+  </section>
 
-  signupForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+  <!-- Footer -->
+  <footer class="footer">
 
-    // Get field values
-    const fullName = document.getElementById("fullName").value.trim();
-    const flatNumber = document.getElementById("flatNumber").value.trim();
-    const phoneNumber = document.getElementById("phoneNumber").value.trim();
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    <div class="container text-center">
+      Society Helpdesk
+    </div>
 
-    // Validation patterns
-    const namePattern = /^[A-Za-z\s]{3,}$/;
-    const flatPattern = /^[A-Za-z0-9\-\/]{1,10}$/;
-    const phonePattern = /^[6-9]\d{9}$/;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  </footer>
 
-    // Clear previous message
-    signupMessage.innerHTML = "";
+  <!-- Validation Script -->
+  <script>
 
-    // Full Name Validation
-    if (!namePattern.test(fullName)) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Enter a valid full name (minimum 3 letters).
-        </div>`;
-      return;
-    }
+    const signupForm =
+      document.getElementById("signupForm");
 
-    // Flat Number Validation
-    if (!flatPattern.test(flatNumber)) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Enter a valid flat number.
-        </div>`;
-      return;
-    }
+    const signupMessage =
+      document.getElementById("signupMessage");
 
-    // Phone Number Validation
-    if (!phonePattern.test(phoneNumber)) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Enter a valid 10-digit Indian mobile number.
-        </div>`;
-      return;
-    }
+    signupForm.addEventListener(
+      "submit",
+      function (e) {
 
-    // Email Validation
-    if (!emailPattern.test(email)) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Enter a valid email address.
-        </div>`;
-      return;
-    }
+        e.preventDefault();
 
-    // Password Length Validation
-    if (password.length < 6) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Password must be at least 6 characters long.
-        </div>`;
-      return;
-    }
+        // Get values
+        const fullName =
+          document.getElementById("fullName")
+          .value.trim();
 
-    // Password Strength Validation
-    const upperCase = /[A-Z]/;
-    const lowerCase = /[a-z]/;
-    const number = /[0-9]/;
+        const flatNumber =
+          document.getElementById("flatNumber")
+          .value.trim();
 
-    if (
-      !upperCase.test(password) ||
-      !lowerCase.test(password) ||
-      !number.test(password)
-    ) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Password must contain uppercase, lowercase, and a number.
-        </div>`;
-      return;
-    }
+        const phoneNumber =
+          document.getElementById("phoneNumber")
+          .value.trim();
 
-    // Confirm Password Validation
-    if (password !== confirmPassword) {
-      signupMessage.innerHTML =
-        `<div class="alert alert-danger">
-          Passwords do not match.
-        </div>`;
-      return;
-    }
+        const email =
+          document.getElementById("signupEmail")
+          .value.trim();
 
-    // Success Message
-    signupMessage.innerHTML =
-      `<div class="alert alert-success">
-        Validation successful! Ready for Firebase signup.
-      </div>`;
+        const password =
+          document.getElementById("signupPassword")
+          .value;
 
-    // Firebase signup code goes here
-    console.log("All validations passed");
-  });
-</script>
-  </body>
-  </html>
+        const confirmPassword =
+          document.getElementById("confirmPassword")
+          .value;
+
+        // Patterns
+        const namePattern =
+          /^[A-Za-z\s]{3,}$/;
+
+        const flatPattern =
+          /^[A-Za-z0-9\-\/]{1,10}$/;
+
+        const phonePattern =
+          /^[6-9]\d{9}$/;
+
+        const emailPattern =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        signupMessage.innerHTML = "";
+
+        // Name validation
+        if (!namePattern.test(fullName)) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Enter valid full name.
+            </div>`;
+
+          return;
+        }
+
+        // Flat validation
+        if (!flatPattern.test(flatNumber)) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Enter valid flat number.
+            </div>`;
+
+          return;
+        }
+
+        // Phone validation
+        if (!phonePattern.test(phoneNumber)) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Enter valid phone number.
+            </div>`;
+
+          return;
+        }
+
+        // Email validation
+        if (!emailPattern.test(email)) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Enter valid email.
+            </div>`;
+
+          return;
+        }
+
+        // Password validation
+        if (password.length < 6) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Password must be 6 characters.
+            </div>`;
+
+          return;
+        }
+
+        // Match validation
+        if (password !== confirmPassword) {
+
+          signupMessage.innerHTML =
+            `<div class="alert alert-danger">
+              Passwords do not match.
+            </div>`;
+
+          return;
+        }
+
+        // Success
+        signupMessage.innerHTML =
+          `<div class="alert alert-success">
+            Account created successfully!
+          </div>`;
+
+        // Redirect
+        setTimeout(() => {
+
+          window.location.href =
+            "raise.html";
+
+        }, 1000);
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
